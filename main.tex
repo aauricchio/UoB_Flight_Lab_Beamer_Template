@@ -1,0 +1,59 @@
+\documentclass[aspectratio=169, 10pt]{beamer}
+
+% --- Load the Bristol Theme ---
+\usepackage{./template/flight_lab_theme} 
+
+% --- Standard Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% --- Presentation Info ---
+\title{Presentation Title}
+\author{Firstname Surname}
+\institute{University of Bristol} 
+\date{12/03/25}
+
+\begin{document}
+
+% --- Slide 1: Title ---
+{
+% We hide the footer here because the title page template handles it
+\setbeamertemplate{footline}{} 
+\begin{frame}
+    \titlepage
+\end{frame}
+}
+
+% --- Slide 2: About Me ---
+\begin{frame}
+    \frametitle{About me}
+    
+    % The 1.5em spacing is now automatic thanks to the .sty file
+    \begin{itemize}\itemsep=1em
+        \item Fact one.
+        \item fact two.
+        \item Fact three.
+    \end{itemize}
+\end{frame}
+
+% --- Slide 3: Block & Footnote Test ---
+\begin{frame}{Frame Title}
+
+    \begin{block}{Observation 1}
+        Here is an extremely interesting observation. \footnote{This is a footnote. Notice the extra space below it separating it from the red bar.} \footnote{Another footnote}
+    \end{block}
+
+    \begin{block}{Observation 2}
+        Here is another extremely interesting observation. 
+    \end{block}
+
+\end{frame}
+
+\begin{frame}{Equations}
+Here is a nonsensical equation:
+    \begin{equation}
+        \int_{x\in \mathcal{X}\oplus\Omega(t)} x(\tau) d\tau
+    \end{equation}
+\end{frame}
+
+\end{document}

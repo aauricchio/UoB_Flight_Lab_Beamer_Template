@@ -1,0 +1,101 @@
+% bristoltheme.sty
+\ProvidesPackage{flight_lab_theme}[2025/01/21 Bristol Beamer Theme]
+
+% --- Required Packages ---
+\RequirePackage{tikz}
+\RequirePackage{helvet}  
+\RequirePackage{roboto}  
+\RequirePackage{svg}     
+\RequirePackage{tcolorbox} 
+
+% --- Colors ---
+\definecolor{BristolRed}{RGB}{165, 28, 48} 
+
+% --- Font Definitions ---
+\usefonttheme{professionalfonts}
+\newcommand{\rockwellfont}{\robotoslab}
+
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{author}{series=\mdseries}
+
+% --- Global Settings ---
+\setbeamercolor{structure}{fg=BristolRed}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{itemize item}{fg=black} 
+\setbeamertemplate{itemize items}[circle] 
+\setbeamertemplate{navigation symbols}{}
+
+% Adjust margins
+\setbeamersize{text margin left=1cm, text margin right=1cm}
+
+% --- LIST SPACING (1.5em Default) ---
+% These hooks ensure every list has 1.5em separation automatically
+\addtobeamertemplate{itemize body begin}{}{\setlength{\itemsep}{1.5em}}
+\addtobeamertemplate{enumerate body begin}{}{\setlength{\itemsep}{1.5em}}
+
+\setlength{\skip\footins}{2em} 
+
+
+% --- BACKGROUND TEMPLATE ---
+\setbeamertemplate{background canvas}{%
+    \begin{tikzpicture}[remember picture, overlay]
+        \ifnum\thepage=1
+            % Title Slide: Bold, 6pt inside SVG
+            \node[anchor=north west, inner sep=0pt] at (current page.north west) {
+                {\rockwellfont\bfseries\fontsize{6pt}{7pt}\selectfont \includesvg[width=\paperwidth, height=\paperheight]{template/Title_red.svg}}
+            };
+        \else
+            % Content Slide: Bold, 6pt inside SVG
+            \node[anchor=north, inner sep=0pt] at (current page.north) {
+                 {\rockwellfont\bfseries\fontsize{6pt}{7pt}\selectfont \includesvg[width=\paperwidth]{template/TopBar.svg}}
+            };
+        \fi
+    \end{tikzpicture}
+}
+
+% --- HEADLINE & FOOTLINE ---
+\setbeamertemplate{headline}{}
+
+\setbeamertemplate{footline}{%
+    \ifnum\thepage>1
+        \begin{beamercolorbox}[wd=\paperwidth,ht=6ex,dp=1.5ex,leftskip=.3cm,rightskip=.3cm]{structure}
+            \begin{tikzpicture}[remember picture, overlay]
+                \fill[BristolRed] (current page.south west) rectangle ([yshift=0.6cm]current page.south east);
+                \node[anchor=south west] at ([xshift=0.1cm, yshift=0.1cm]current page.south west) {
+            \textcolor{white}{\footnotesize\textbf\insertdate}
+        };
+        \node[anchor=south east] at ([xshift=-0.1cm, yshift=0.1cm]current page.south east) {
+             \textcolor{white}{\footnotesize\sffamily \insertframenumber}
+        };
+            \end{tikzpicture}
+        \end{beamercolorbox}
+    \fi
+}
+
+% --- TITLE PAGE CONTENT ---
+\setbeamertemplate{title page}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=west, align=left, text width=10cm] at ([xshift=1cm, yshift=-0.5cm]current page.west) {
+            \color{white} 
+            \usebeamerfont{title}\huge \inserttitle\\[0.6cm]
+            \usebeamerfont{author}\Large \insertauthor\\[0.2cm]
+            \usebeamerfont{author}\large \insertinstitute
+        };
+        \node[anchor=south west] at ([xshift=0.1cm, yshift=0.1cm]current page.south west) {
+            \textcolor{white}{\footnotesize\textbf\insertdate}
+        };
+        \node[anchor=south east] at ([xshift=-0.1cm, yshift=0.1cm]current page.south east) {
+             \textcolor{black}{\footnotesize\sffamily \insertframenumber}
+        };
+    \end{tikzpicture}
+}
+
+% --- Content Slide Title Spacing ---
+\setbeamertemplate{frametitle}{
+    \vspace{1.5cm} 
+    \color{black}\Large\insertframetitle
+}
