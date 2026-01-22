@@ -6,6 +6,7 @@
 % --- Standard Packages ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{caption}
 
 % --- Presentation Info ---
 \title{Presentation Title}
@@ -26,27 +27,30 @@
 
 % --- Slide 2: About Me ---
 \begin{frame}
-    \frametitle{About me}
+    \frametitle{Bullets and Spacing}
+    Here are some interesting facts about me:
     
-    % The 1.5em spacing is now automatic thanks to the .sty file
-    \begin{itemize}\itemsep=1em
-        \item Fact one.
-        \item fact two.
-        \item Fact three.
+    \begin{itemize}
+        \item Fact one
+        \item Fact two
+        \item Fact three
     \end{itemize}
 \end{frame}
 
 % --- Slide 3: Block & Footnote Test ---
-\begin{frame}{Frame Title}
+\begin{frame}{Blocks and Footnotes}
 
     \begin{block}{Observation 1}
-        Here is an extremely interesting observation. \footnote{This is a footnote. Notice the extra space below it separating it from the red bar.} \footnote{Another footnote}
+        Here is an extremely interesting observation in red.\footnote{This is a footnote.}
     \end{block}
 
-    \begin{block}{Observation 2}
-        Here is another extremely interesting observation. 
-    \end{block}
+    \begin{exampleblock}{Observation 2}
+        Here is another extremely interesting observation in green.
+    \end{exampleblock}
 
+    \begin{navyblock}{Observation 3}
+        Here is yet another extremely interesting observation in blue.
+    \end{navyblock}
 \end{frame}
 
 \begin{frame}{Equations}
@@ -56,13 +60,36 @@ Here is a nonsensical equation:
     \end{equation}
 \end{frame}
 
-\begin{frame}{Image}
-    \begin{figure}
+\begin{frame}{Images}
+    \begin{columns}
+        \column{0.5\textwidth}
         \centering
-        \label{fig:puppy}
-        \includegraphics[width=0.4\linewidth]{puppy.jpeg}
-        \caption{An image of a puppy.}
-    \end{figure}
+        \includegraphics[width=0.8\linewidth]{puppy.jpeg}
+        \captionof{figure}{Puppy 1}
+
+        \column{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{puppy.jpeg}
+        \captionof{figure}{Puppy 2}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Tables}
+    \begin{table}
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Header 1} & \textbf{Header 2} & \textbf{Header 3} \\
+            \hline
+            Row 1, Col 1 & Row 1, Col 2 & Row 1, Col 3 \\
+            \hline
+            Row 2, Col 1 & Row 2, Col 2 & Row 2, Col 3 \\
+            \hline
+            \textbf{Total} & \textbf{100} & \textbf{Yes} \\
+            \hline
+        \end{tabular}
+        \caption{A sample table description.}
+    \end{table}
 \end{frame}
 
 \end{document}

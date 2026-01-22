@@ -3,18 +3,15 @@
 
 % --- Required Packages ---
 \RequirePackage{tikz}
-\RequirePackage{helvet}  
-\RequirePackage{roboto}  
-\RequirePackage{svg}     
-\RequirePackage{tcolorbox} 
+\RequirePackage{helvet}
 
 % --- Colors ---
 \definecolor{BristolRed}{RGB}{165, 28, 48} 
+\definecolor{BristolNavy}{RGB}{0, 17, 148} 
+\definecolor{BristolGreen}{RGB}{28, 120, 0}
 
 % --- Font Definitions ---
 \usefonttheme{professionalfonts}
-\newcommand{\rockwellfont}{\robotoslab}
-
 \setbeamerfont{title}{series=\bfseries}
 \setbeamerfont{frametitle}{series=\bfseries}
 \setbeamerfont{author}{series=\mdseries}
@@ -28,14 +25,33 @@
 \setbeamercolor{itemize item}{fg=black} 
 \setbeamertemplate{itemize items}[circle] 
 \setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+
+% --- Block Styles (Bubbles) ---
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor{block title}{bg=BristolRed, fg=white}
+\setbeamercolor{block body}{bg=BristolRed!10, fg=black}
+\setbeamercolor{block title alert}{bg=BristolNavy, fg=white}
+\setbeamercolor{block body alert}{bg=BristolNavy!10, fg=black}
+\setbeamercolor{block title example}{bg=BristolGreen, fg=white}
+\setbeamercolor{block body example}{bg=BristolGreen!20, fg=black}
+
+% --- Custom Navy Block ---
+\newenvironment{navyblock}[1]{%
+  \setbeamercolor{block title}{bg=BristolNavy,fg=white}
+  \setbeamercolor{block body}{bg=BristolNavy!10,fg=black}
+  \begin{block}{#1}
+}{%
+  \end{block}
+}
 
 % Adjust margins
 \setbeamersize{text margin left=1cm, text margin right=1cm}
 
 % --- LIST SPACING (1.5em Default) ---
 % These hooks ensure every list has 1.5em separation automatically
-\addtobeamertemplate{itemize body begin}{}{\setlength{\itemsep}{1.5em}}
-\addtobeamertemplate{enumerate body begin}{}{\setlength{\itemsep}{1.5em}}
+\addtobeamertemplate{itemize body begin}{}{\setlength{\itemsep}{5em}}
+\addtobeamertemplate{enumerate body begin}{}{\setlength{\itemsep}{5em}}
 
 \setlength{\skip\footins}{2em} 
 
@@ -44,14 +60,14 @@
 \setbeamertemplate{background canvas}{%
     \begin{tikzpicture}[remember picture, overlay]
         \ifnum\thepage=1
-            % Title Slide: Bold, 6pt inside SVG
+            % Title Slide: Bold, 6pt inside PDF
             \node[anchor=north west, inner sep=0pt] at (current page.north west) {
-                {\rockwellfont\bfseries\fontsize{6pt}{7pt}\selectfont \includesvg[width=\paperwidth, height=\paperheight]{template/Title_red.svg}}
+                {\includegraphics[width=\paperwidth, height=\paperheight]{template/Title_red.pdf}}
             };
         \else
-            % Content Slide: Bold, 6pt inside SVG
+            % Content Slide: Bold, 6pt inside PDF
             \node[anchor=north, inner sep=0pt] at (current page.north) {
-                 {\rockwellfont\bfseries\fontsize{6pt}{7pt}\selectfont \includesvg[width=\paperwidth]{template/TopBar.svg}}
+                 {\includegraphics[width=\paperwidth]{template/TopBar.pdf}}
             };
         \fi
     \end{tikzpicture}
@@ -62,7 +78,7 @@
 
 \setbeamertemplate{footline}{%
     \ifnum\thepage>1
-        \begin{beamercolorbox}[wd=\paperwidth,ht=6ex,dp=1.5ex,leftskip=.3cm,rightskip=.3cm]{structure}
+        \begin{beamercolorbox}[wd=\paperwidth,ht=1cm,dp=0.5cm,leftskip=.3cm,rightskip=.3cm]{structure}
             \begin{tikzpicture}[remember picture, overlay]
                 \fill[BristolRed] (current page.south west) rectangle ([yshift=0.6cm]current page.south east);
                 \node[anchor=south west] at ([xshift=0.1cm, yshift=0.1cm]current page.south west) {
